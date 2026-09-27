@@ -1,8 +1,9 @@
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const localApiBaseUrl = 'http://localhost:8000'
 
 export const API_BASE_URL = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000'
+  : localApiBaseUrl
 
 export const API_ROOT_URL = `${API_BASE_URL}/api`
 
@@ -11,6 +12,10 @@ export function unwrapCollection(payload) {
   if (Array.isArray(payload?.items)) return payload.items
   if (Array.isArray(payload?.data)) return payload.data
   if (Array.isArray(payload?.results)) return payload.results
+  if (Array.isArray(payload?.docs)) return payload.docs
+  if (Array.isArray(payload?.data?.items)) return payload.data.items
+  if (Array.isArray(payload?.data?.results)) return payload.data.results
+  if (Array.isArray(payload?.data?.docs)) return payload.data.docs
   return []
 }
 
