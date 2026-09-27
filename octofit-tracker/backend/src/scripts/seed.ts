@@ -32,6 +32,7 @@ const seedWorkouts = [
 ];
 
 /**
+ * Seed the octofit_db database with test data.
  * Upsert predictable demo data without removing unrelated database records.
  */
 async function seedDatabase() {
